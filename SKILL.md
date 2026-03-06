@@ -67,6 +67,29 @@ Skill 提供了两个 Google Gemini/Nano Banana 水印的 Mask 示例：
 
 这些 Mask 专门针对 Google Gemini/Nano Banana 的水印形状设计。如果需要去除其他水印，需要创建对应的 Mask。
 
+## 使用脚本快速去除水印
+
+Skill 提供了 Python 脚本 `scripts/remove_watermark.py`，可以直接运行去除水印：
+
+```bash
+# 基本用法
+python3 scripts/remove_watermark.py input.png output.png
+
+# 完整用法（指定边距）
+python3 scripts/remove_watermark.py input.png output.png 32
+```
+
+脚本会自动：
+1. 检测图片是否有水印
+2. 根据图片尺寸选择合适的 Mask（48px 或 96px）
+3. 执行 Reverse Alpha Blending 算法
+4. 保存处理后的图片
+
+**依赖**：需要安装 Pillow 和 NumPy
+```bash
+pip install Pillow numpy
+```
+
 ## 实现注意事项
 
 1. **Alpha 强度调整**：如果水印去除不干净，可以增大 alpha 强度系数；如果去除后有痕迹，可以减小
